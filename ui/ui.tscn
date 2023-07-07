@@ -1,0 +1,200 @@
+[gd_scene load_steps=13 format=3 uid="uid://cl0fp3dfiusu0"]
+
+[ext_resource type="Texture2D" uid="uid://cdb2lpgdi277b" path="res://art/ui/heart.png" id="1_b77uw"]
+[ext_resource type="Texture2D" uid="uid://2en4kmdthek3" path="res://art/ui/progress-bar-background.png" id="2_ahkln"]
+[ext_resource type="Texture2D" uid="uid://eeh0pgo1scdl" path="res://art/ui/progress-bar-filll.png" id="2_fynqe"]
+[ext_resource type="Texture2D" uid="uid://dpb3wq7mb0r1a" path="res://art/ui/progress-bar-food-fill.png" id="3_brebb"]
+[ext_resource type="Texture2D" uid="uid://c2s48bufxnqi7" path="res://art/ui/progress-bar-water-fill.png" id="4_3r1em"]
+[ext_resource type="Texture2D" uid="uid://d2l78k1htdyn2" path="res://art/ui/panel.png" id="5_1j6du"]
+[ext_resource type="Texture2D" uid="uid://nu1s0kta6njc" path="res://art/ui/panel-small.png" id="6_b2hjw"]
+[ext_resource type="Texture2D" uid="uid://dax1mrhmtrdin" path="res://art/ui/panel-wide.png" id="8_xl4of"]
+[ext_resource type="Texture2D" uid="uid://daykyjiaybf7v" path="res://art/ui/radio-button-unchecked.png" id="9_1gj7e"]
+[ext_resource type="Texture2D" uid="uid://d11kh75kfw4kf" path="res://art/ui/panel-time.png" id="9_7g2p4"]
+[ext_resource type="Script" path="res://ui/time.gd" id="10_kye1u"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_igttu"]
+font_size = 190
+
+[node name="ui" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="bottom_left" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -10.0
+offset_top = -192.0
+offset_right = 150.0
+offset_bottom = -126.0
+grow_vertical = 0
+scale = Vector2(3, 3)
+pivot_offset = Vector2(-10, 10)
+theme_override_constants/separation = 0
+alignment = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="bottom_left"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="bottom_left/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("1_b77uw")
+
+[node name="TextureRect2" type="TextureRect" parent="bottom_left/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("1_b77uw")
+
+[node name="TextureRect3" type="TextureRect" parent="bottom_left/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("1_b77uw")
+
+[node name="TextureRect4" type="TextureRect" parent="bottom_left/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("1_b77uw")
+
+[node name="TextureRect5" type="TextureRect" parent="bottom_left/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("1_b77uw")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="bottom_left"]
+layout_mode = 2
+value = 60.0
+texture_under = ExtResource("2_fynqe")
+texture_over = ExtResource("2_ahkln")
+texture_progress = ExtResource("3_brebb")
+
+[node name="TextureProgressBar2" type="TextureProgressBar" parent="bottom_left"]
+layout_mode = 2
+value = 30.0
+texture_under = ExtResource("2_fynqe")
+texture_over = ExtResource("2_ahkln")
+texture_progress = ExtResource("4_3r1em")
+
+[node name="bottom_right" type="BoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -440.0
+offset_top = -128.0
+offset_right = -220.0
+offset_bottom = -64.0
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(2, 2)
+pivot_offset = Vector2(10, 10)
+
+[node name="HBoxContainer" type="BoxContainer" parent="bottom_right"]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="TextureRect2" type="TextureRect" parent="bottom_right/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("6_b2hjw")
+stretch_mode = 2
+
+[node name="TextureRect3" type="TextureRect" parent="bottom_right/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("6_b2hjw")
+stretch_mode = 2
+
+[node name="TextureRect4" type="TextureRect" parent="bottom_right/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("6_b2hjw")
+stretch_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="bottom_right"]
+layout_mode = 2
+size_flags_vertical = 8
+texture = ExtResource("5_1j6du")
+stretch_mode = 2
+
+[node name="top_right" type="BoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -749.0
+offset_right = -249.0
+offset_bottom = 64.0
+grow_horizontal = 0
+scale = Vector2(1.5, 1.5)
+pivot_offset = Vector2(20, -20)
+alignment = 2
+
+[node name="TextureRect" type="TextureRect" parent="top_right"]
+layout_mode = 2
+texture = ExtResource("8_xl4of")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="top_right/TextureRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="top_right/TextureRect/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("9_1gj7e")
+
+[node name="TextureRect2" type="TextureRect" parent="top_right/TextureRect/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("9_1gj7e")
+
+[node name="TextureRect3" type="TextureRect" parent="top_right/TextureRect/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("9_1gj7e")
+
+[node name="TextureRect4" type="TextureRect" parent="top_right/TextureRect/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("9_1gj7e")
+
+[node name="TextureRect5" type="TextureRect" parent="top_right/TextureRect/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("9_1gj7e")
+
+[node name="TextureRect6" type="TextureRect" parent="top_right/TextureRect/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("9_1gj7e")
+
+[node name="TextureRect7" type="TextureRect" parent="top_right/TextureRect/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("9_1gj7e")
+
+[node name="top_left" type="BoxContainer" parent="."]
+layout_mode = 1
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(1.5, 1.5)
+pivot_offset = Vector2(-20, -20)
+
+[node name="time_container" type="TextureRect" parent="top_left"]
+layout_mode = 2
+texture = ExtResource("9_7g2p4")
+
+[node name="time" type="Label" parent="top_left/time_container"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 6.0
+offset_right = 372.0
+offset_bottom = 205.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.2, 0.2)
+text = "00:00"
+label_settings = SubResource("LabelSettings_igttu")
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("10_kye1u")
