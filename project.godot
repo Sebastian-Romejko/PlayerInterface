@@ -18,7 +18,6 @@ config/icon="res://icon.svg"
 [autoload]
 
 Global="*res://scripts/global.gd"
-Pair="*res://scripts/pair.gd"
 
 [input]
 

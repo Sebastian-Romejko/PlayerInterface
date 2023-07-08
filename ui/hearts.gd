@@ -8,7 +8,8 @@ signal condition_fulfilled()
 @onready var heart4 = $heart4
 @onready var heart5 = $heart5
 
-var condition
+var condition_heart_id
+var condition_value
 var hearts = {}
 
 func _ready():
@@ -22,9 +23,11 @@ func _ready():
 
 func set_condition(value):
 	if value == -1:
-		condition = Pair.new(get_last_positive_heart(), 0)
+		condition_heart_id = get_last_positive_heart()
+		condition_value = 0
 	elif value == 1:
-		condition = Pair.new(get_first_negative_heart(), 1)
+		condition_heart_id = get_first_negative_heart()
+		condition_value = 1
 
 func get_last_positive_heart():
 	for i in range(hearts.size(),0,-1):
@@ -59,14 +62,15 @@ func _on_heart_5_value_changed(value):
 	check_condition()
 
 func check_condition():
-	if condition != null 
-		&& hearts[condition.id] == condition.value
+	if condition_heart_id != 0 \
+		&& hearts[condition_heart_id] == condition_value \
 		&& is_order_currect():
-		condition = null
+		condition_heart_id = 0
+		condition_value = null
 		condition_fulfilled.emit()
 
 func is_order_currect():
 	for heart in hearts:
-		if heart.key > condition.id && heart.value = 1:
+		if heart.key > condition_heart_id && heart.value == 1:
 			return false
 	return true

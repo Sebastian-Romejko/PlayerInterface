@@ -1,10 +1,13 @@
 extends CharacterBody2D
 
-@export var move_speed : float = 30
+@export var move_speed : float = 2000
 @export var idle_time_from : float = 1
 @export var idle_time_to : float = 2
 @export var walk_time_from : float = 3
 @export var walk_time_to : float = 5
+@export var max_range: float = 200
+@export var waiting_time: float = 500
+@export var collectibles: Node2D
 
 @onready var animation_tree = $AnimationTree
 @onready var state_machine = animation_tree.get("parameters/playback")
@@ -14,39 +17,64 @@ var last_changed_position: Vector2
 var last_changed_position_timestamp: int
 
 var move_direction : Vector2 = Vector2.ZERO
+var nearest_collectible
 
-func _physics_process(_delta):
-	if player_moving():
-		last_changed_position_timestamp = Time.get_ticks_msec()
-		last_changed_position = Vector2(round(position.x), round(position.y))
+func _init():
+	last_changed_position = position
+	last_changed_position_timestamp = Time.get_ticks_msec()
+
+func _physics_process(delta):
+	#if player_moving():
+	#	last_changed_position_timestamp = Time.get_ticks_msec()
+	#	last_changed_position = Vector2(round(position.x), round(position.y))
 		
 	if move_direction == Vector2.ZERO \
-		|| player_not_moving_timeout():
-		select_new_direction()
-		
-	velocity = move_direction * move_speed
+		|| nearest_collectible == null:
+		nearest_collectible = get_nearest_collectible()
+	
+	velocity = (nearest_collectible.position - position).normalized() * delta * move_speed
 	state_machine.travel("walk")
 	set_sprite_direction()
 	move_and_slide()
 
+func handle_pick_up_collectible():
+	move_direction == get_nearest_collectible().position
+
 func player_moving():
-	return Vector2(round(position.x), round(position.y)) != last_changed_position
+	return Vector2(round(position.x), round(position.y)) - last_changed_position 
 	
 func player_not_moving_timeout():
-	return Time.get_ticks_msec() - last_changed_position_timestamp > 1000 \
+	return Time.get_ticks_msec() - last_changed_position_timestamp > waiting_time \
 	 && Vector2(round(position.x), round(position.y)) == last_changed_position
 
 func select_new_direction():
-	if randi_range(-1,1) > 0:
-		move_direction = Vector2(
-			randi_range(-1,1),
+	if any_collectible_in_range():
+		return get_nearest_collectible().position
+
+	if randi_range(-1, 1) > 0:
+		return position + Vector2(
+			randi_range(-50, 50),
 			0,
 		)
 	else:
-		move_direction = Vector2(
+		return position + Vector2(
 			0,
-			randi_range(-1,1),
+			randi_range(-50, 50),
 		)
+
+func any_collectible_in_range():
+	for collectible in collectibles.get_children():
+		if position.distance_to(collectible.position) < max_range:
+			return true
+
+func get_nearest_collectible():
+	var result
+	for collectible in collectibles.get_children():
+		#if position.distance_to(collectible.position) < max_range:
+		if result == null \
+			|| position.distance_to(collectible.position) < position.distance_to(result.position):
+			result = collectible
+	return result
 
 func set_sprite_direction():
 	if move_direction.x < 0:

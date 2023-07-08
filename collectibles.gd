@@ -15,6 +15,8 @@ const TORCH_PATH = "res://collectibles/torch.tscn"
 @export var water_count = 100
 @export var torch_count = 60
 
+@export var character: Node2D
+
 func _ready():
 	spawn_collectibles()
 
@@ -50,11 +52,10 @@ func spawn_collectibles():
 		add_child(torch)
 
 func _on_food_gain(value):
-	pass
-
+	print("FOOD TAKEN FOR: " + str(value))
 
 func _on_water_gain(value):
-	pass
+	print("WATER TAKEN FOR: " + str(value))
 
 func _on_torch_gain():
-	pass
+	print("TORCH TAKEN")

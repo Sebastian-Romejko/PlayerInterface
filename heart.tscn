@@ -1,11 +1,11 @@
 [gd_scene load_steps=3 format=3 uid="uid://grcomksuxh0c"]
 
 [ext_resource type="Texture2D" uid="uid://bse5sfmwqjbt2" path="res://art/ui/heart.png" id="1_f17dh"]
-[ext_resource type="Script" path="res://scripts/heart.gd" id="2_t8e1f"]
+[ext_resource type="Script" path="res://ui/heart.gd" id="2_4jira"]
 
 [node name="heart" type="TextureRect"]
 texture = ExtResource("1_f17dh")
-script = ExtResource("2_t8e1f")
+script = ExtResource("2_4jira")
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
