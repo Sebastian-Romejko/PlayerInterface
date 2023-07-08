@@ -24,10 +24,6 @@ func _init():
 	last_changed_position_timestamp = Time.get_ticks_msec()
 
 func _physics_process(delta):
-	#if player_moving():
-	#	last_changed_position_timestamp = Time.get_ticks_msec()
-	#	last_changed_position = Vector2(round(position.x), round(position.y))
-		
 	if move_direction == Vector2.ZERO \
 		|| nearest_collectible == null:
 		nearest_collectible = get_nearest_collectible()
@@ -36,16 +32,6 @@ func _physics_process(delta):
 	state_machine.travel("walk")
 	set_sprite_direction()
 	move_and_slide()
-
-func handle_pick_up_collectible():
-	move_direction == get_nearest_collectible().position
-
-func player_moving():
-	return Vector2(round(position.x), round(position.y)) - last_changed_position 
-	
-func player_not_moving_timeout():
-	return Time.get_ticks_msec() - last_changed_position_timestamp > waiting_time \
-	 && Vector2(round(position.x), round(position.y)) == last_changed_position
 
 func select_new_direction():
 	if any_collectible_in_range():
@@ -77,7 +63,7 @@ func get_nearest_collectible():
 	return result
 
 func set_sprite_direction():
-	if move_direction.x < 0:
+	if velocity.x < 0:
 		sprite.flip_h = true
 	else:
 		sprite.flip_h = false

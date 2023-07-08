@@ -1,6 +1,12 @@
 extends TextureProgressBar
 
+@onready var timer = $Timer
+
+signal condition_fulfilled(id)
+signal mistake()
+
 var can_scroll = false
+var conditions = {}
 
 func _on_mouse_entered():
 	can_scroll = true
@@ -17,3 +23,23 @@ func _input(event):
 				value += 2
 			elif Input.is_action_just_released("mouse_scroll_down"):
 				value -= 2
+				
+		timer.start(1)
+
+func set_condition(value, id):
+	conditions[id] = max(min(self.value + value, 100), 0)
+
+func _on_timer_timeout():
+	var not_done_conditions = {}
+	var any_condition_fulfilled = false
+	for condition_id in conditions.keys():
+		if value - conditions[condition_id] < 5 \
+			|| value - conditions[condition_id] > -5:
+			value = conditions[condition_id]
+			condition_fulfilled.emit(condition_id)
+			any_condition_fulfilled = true
+		else:
+			not_done_conditions[condition_id] = conditions[condition_id]
+	conditions = not_done_conditions
+	if !any_condition_fulfilled:
+		mistake.emit()

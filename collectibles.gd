@@ -1,6 +1,8 @@
 extends Node2D
 
-@onready var game = get_parent()
+signal food_change(value)
+signal water_change(value)
+signal torch_gained()
 
 const FOOD_PATH = "res://collectibles/food.tscn"
 const WATER_PATH = "res://collectibles/water.tscn"
@@ -53,9 +55,11 @@ func spawn_collectibles():
 
 func _on_food_gain(value):
 	print("FOOD TAKEN FOR: " + str(value))
+	food_change.emit(value)
 
 func _on_water_gain(value):
 	print("WATER TAKEN FOR: " + str(value))
+	water_change.emit(value)
 
 func _on_torch_gain():
 	print("TORCH TAKEN")

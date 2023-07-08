@@ -127,3 +127,8 @@ character = NodePath("../character")
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(19, 47)
 zoom = Vector2(2, 2)
+
+[connection signal="condition_fulfilled" from="CanvasLayer/ui" to="." method="_on_ui_condition_fulfilled"]
+[connection signal="mistake" from="CanvasLayer/ui" to="." method="_on_ui_mistake"]
+[connection signal="food_change" from="collectibles" to="." method="_on_collectibles_food_change"]
+[connection signal="water_change" from="collectibles" to="." method="_on_collectibles_water_change"]
