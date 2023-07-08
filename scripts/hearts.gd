@@ -20,6 +20,24 @@ func _ready():
 		5: heart5.value,
 	}
 
+func set_condition(value):
+	if value == -1:
+		condition = Pair.new(get_last_positive_heart(), 0)
+	elif value == 1:
+		condition = Pair.new(get_first_negative_heart(), 1)
+
+func get_last_positive_heart():
+	for i in range(hearts.size(),0,-1):
+		if hearts[i] == 1:
+			return i
+	return 0
+
+func get_first_negative_heart():
+	for i in range(0,hearts.size(),-1):
+		if hearts[i] == 0:
+			return i
+	return 0
+
 func _on_heart_1_value_changed(value):
 	hearts[1] = value
 	check_condition()
@@ -41,5 +59,14 @@ func _on_heart_5_value_changed(value):
 	check_condition()
 
 func check_condition():
-	if condition != null && hearts[condition.id] == condition.value:
+	if condition != null 
+		&& hearts[condition.id] == condition.value
+		&& is_order_currect():
+		condition = null
 		condition_fulfilled.emit()
+
+func is_order_currect():
+	for heart in hearts:
+		if heart.key > condition.id && heart.value = 1:
+			return false
+	return true

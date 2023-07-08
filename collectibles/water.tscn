@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://dyn5mh1klrd2y"]
+
+[ext_resource type="Texture2D" uid="uid://s4go4bk3bi1i" path="res://art/water.png" id="1_inwnu"]
+[ext_resource type="Script" path="res://collectibles/water.gd" id="2_xgevn"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_r3e24"]
+radius = 5.0
+height = 12.0
+
+[node name="water" type="Sprite2D"]
+texture = ExtResource("1_inwnu")
+script = ExtResource("2_xgevn")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 2)
+shape = SubResource("CapsuleShape2D_r3e24")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

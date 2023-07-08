@@ -12,10 +12,10 @@
 [ext_resource type="Script" path="res://ui/progress_bar.gd" id="7_264ll"]
 [ext_resource type="Texture2D" uid="uid://dax1mrhmtrdin" path="res://art/ui/panel-wide.png" id="8_xl4of"]
 [ext_resource type="Texture2D" uid="uid://d11kh75kfw4kf" path="res://art/ui/panel-time.png" id="9_7g2p4"]
-[ext_resource type="Texture2D" uid="uid://d1lh3llewstte" path="res://art/ui/torch.png" id="10_i1qyd"]
 [ext_resource type="Script" path="res://ui/time.gd" id="10_kye1u"]
 [ext_resource type="Script" path="res://ui/torches.gd" id="12_4t6v7"]
 [ext_resource type="PackedScene" uid="uid://cegvcf8j2et2" path="res://ui/torch.tscn" id="12_8tqxu"]
+[ext_resource type="Texture2D" uid="uid://d1lh3llewstte" path="res://art/torch.png" id="14_hvcgr"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_igttu"]
 font_size = 190
@@ -48,29 +48,29 @@ alignment = 2
 layout_mode = 2
 script = ExtResource("2_56tee")
 
-[node name="heart5" parent="bottom_left/hearts" instance=ExtResource("3_t3h2c")]
+[node name="heart1" parent="bottom_left/hearts" instance=ExtResource("3_t3h2c")]
 layout_mode = 2
-id = 5
-
-[node name="heart4" parent="bottom_left/hearts" instance=ExtResource("3_t3h2c")]
-layout_mode = 2
-id = 4
-
-[node name="heart3" parent="bottom_left/hearts" instance=ExtResource("3_t3h2c")]
-layout_mode = 2
-id = 3
+id = 1
 
 [node name="heart2" parent="bottom_left/hearts" instance=ExtResource("3_t3h2c")]
 layout_mode = 2
 id = 2
 
-[node name="heart1" parent="bottom_left/hearts" instance=ExtResource("3_t3h2c")]
+[node name="heart3" parent="bottom_left/hearts" instance=ExtResource("3_t3h2c")]
 layout_mode = 2
-id = 1
+id = 3
+
+[node name="heart4" parent="bottom_left/hearts" instance=ExtResource("3_t3h2c")]
+layout_mode = 2
+id = 4
+
+[node name="heart5" parent="bottom_left/hearts" instance=ExtResource("3_t3h2c")]
+layout_mode = 2
+id = 5
 
 [node name="food" type="TextureProgressBar" parent="bottom_left"]
 layout_mode = 2
-value = 60.0
+value = 100.0
 texture_under = ExtResource("2_fynqe")
 texture_over = ExtResource("2_ahkln")
 texture_progress = ExtResource("3_brebb")
@@ -78,7 +78,7 @@ script = ExtResource("7_264ll")
 
 [node name="water" type="TextureProgressBar" parent="bottom_left"]
 layout_mode = 2
-value = 30.0
+value = 100.0
 texture_under = ExtResource("2_fynqe")
 texture_over = ExtResource("2_ahkln")
 texture_progress = ExtResource("4_3r1em")
@@ -190,7 +190,7 @@ offset_top = -20.0
 offset_right = 469.333
 offset_bottom = 44.0
 scale = Vector2(2, 2)
-texture = ExtResource("10_i1qyd")
+texture = ExtResource("14_hvcgr")
 
 [node name="top_left" type="BoxContainer" parent="."]
 layout_mode = 1
@@ -221,11 +221,11 @@ horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("10_kye1u")
 
-[connection signal="value_changed" from="bottom_left/hearts/heart5" to="bottom_left/hearts" method="_on_heart_5_value_changed"]
-[connection signal="value_changed" from="bottom_left/hearts/heart4" to="bottom_left/hearts" method="_on_heart_4_value_changed"]
+[connection signal="value_changed" from="bottom_left/hearts/heart1" to="bottom_left/hearts" method="_on_heart_5_value_changed"]
+[connection signal="value_changed" from="bottom_left/hearts/heart2" to="bottom_left/hearts" method="_on_heart_4_value_changed"]
 [connection signal="value_changed" from="bottom_left/hearts/heart3" to="bottom_left/hearts" method="_on_heart_3_value_changed"]
-[connection signal="value_changed" from="bottom_left/hearts/heart2" to="bottom_left/hearts" method="_on_heart_2_value_changed"]
-[connection signal="value_changed" from="bottom_left/hearts/heart1" to="bottom_left/hearts" method="_on_heart_1_value_changed"]
+[connection signal="value_changed" from="bottom_left/hearts/heart4" to="bottom_left/hearts" method="_on_heart_2_value_changed"]
+[connection signal="value_changed" from="bottom_left/hearts/heart5" to="bottom_left/hearts" method="_on_heart_1_value_changed"]
 [connection signal="mouse_entered" from="bottom_left/food" to="bottom_left/food" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="bottom_left/food" to="bottom_left/food" method="_on_mouse_exited"]
 [connection signal="mouse_entered" from="bottom_left/water" to="bottom_left/water" method="_on_mouse_entered"]
