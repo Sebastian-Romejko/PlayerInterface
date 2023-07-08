@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bse5sfmwqjbt2"
-path="res://.godot/imported/heart.png-b4bd456f0f9274a5ea3faca790664d95.ctex"
+uid="uid://cg8ffppypmxok"
+path="res://.godot/imported/knigh_animationt.png-6ff659f808ae55d7ce7a223f0a906115.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/ui/heart.png"
-dest_files=["res://.godot/imported/heart.png-b4bd456f0f9274a5ea3faca790664d95.ctex"]
+source_file="res://art/knigh_animationt.png"
+dest_files=["res://.godot/imported/knigh_animationt.png-6ff659f808ae55d7ce7a223f0a906115.ctex"]
 
 [params]
 

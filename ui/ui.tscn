@@ -1,19 +1,21 @@
-[gd_scene load_steps=16 format=3 uid="uid://cl0fp3dfiusu0"]
+[gd_scene load_steps=18 format=3 uid="uid://df5xbd42n40dy"]
 
 [ext_resource type="Script" path="res://ui/ui.gd" id="1_b3k1t"]
+[ext_resource type="Script" path="res://scripts/hearts.gd" id="2_56tee"]
 [ext_resource type="Texture2D" uid="uid://2en4kmdthek3" path="res://art/ui/progress-bar-background.png" id="2_ahkln"]
-[ext_resource type="Script" path="res://ui/hearts.gd" id="2_dpohs"]
 [ext_resource type="Texture2D" uid="uid://eeh0pgo1scdl" path="res://art/ui/progress-bar-filll.png" id="2_fynqe"]
 [ext_resource type="Texture2D" uid="uid://dpb3wq7mb0r1a" path="res://art/ui/progress-bar-food-fill.png" id="3_brebb"]
 [ext_resource type="PackedScene" uid="uid://grcomksuxh0c" path="res://heart.tscn" id="3_t3h2c"]
 [ext_resource type="Texture2D" uid="uid://c2s48bufxnqi7" path="res://art/ui/progress-bar-water-fill.png" id="4_3r1em"]
 [ext_resource type="Texture2D" uid="uid://d2l78k1htdyn2" path="res://art/ui/panel.png" id="5_1j6du"]
 [ext_resource type="Texture2D" uid="uid://nu1s0kta6njc" path="res://art/ui/panel-small.png" id="6_b2hjw"]
+[ext_resource type="Script" path="res://ui/progress_bar.gd" id="7_264ll"]
 [ext_resource type="Texture2D" uid="uid://dax1mrhmtrdin" path="res://art/ui/panel-wide.png" id="8_xl4of"]
-[ext_resource type="Texture2D" uid="uid://daykyjiaybf7v" path="res://art/ui/radio-button-unchecked.png" id="9_1gj7e"]
 [ext_resource type="Texture2D" uid="uid://d11kh75kfw4kf" path="res://art/ui/panel-time.png" id="9_7g2p4"]
 [ext_resource type="Texture2D" uid="uid://d1lh3llewstte" path="res://art/ui/torch.png" id="10_i1qyd"]
 [ext_resource type="Script" path="res://ui/time.gd" id="10_kye1u"]
+[ext_resource type="Script" path="res://ui/torches.gd" id="12_4t6v7"]
+[ext_resource type="PackedScene" uid="uid://cegvcf8j2et2" path="res://ui/torch.tscn" id="12_8tqxu"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_igttu"]
 font_size = 190
@@ -44,7 +46,7 @@ alignment = 2
 
 [node name="hearts" type="HBoxContainer" parent="bottom_left"]
 layout_mode = 2
-script = ExtResource("2_dpohs")
+script = ExtResource("2_56tee")
 
 [node name="heart5" parent="bottom_left/hearts" instance=ExtResource("3_t3h2c")]
 layout_mode = 2
@@ -72,6 +74,7 @@ value = 60.0
 texture_under = ExtResource("2_fynqe")
 texture_over = ExtResource("2_ahkln")
 texture_progress = ExtResource("3_brebb")
+script = ExtResource("7_264ll")
 
 [node name="water" type="TextureProgressBar" parent="bottom_left"]
 layout_mode = 2
@@ -79,6 +82,7 @@ value = 30.0
 texture_under = ExtResource("2_fynqe")
 texture_over = ExtResource("2_ahkln")
 texture_progress = ExtResource("4_3r1em")
+script = ExtResource("7_264ll")
 
 [node name="bottom_right" type="BoxContainer" parent="."]
 layout_mode = 1
@@ -149,41 +153,35 @@ offset_right = 472.0
 offset_bottom = 32.0
 grow_vertical = 2
 theme_override_constants/separation = 0
+script = ExtResource("12_4t6v7")
 
-[node name="torch7" type="TextureRect" parent="top_right/torches_panel/torches"]
-modulate = Color(0.8, 0.8, 0.8, 1)
+[node name="torch7" parent="top_right/torches_panel/torches" instance=ExtResource("12_8tqxu")]
 layout_mode = 2
-texture = ExtResource("9_1gj7e")
+id = 7
 
-[node name="torch6" type="TextureRect" parent="top_right/torches_panel/torches"]
-modulate = Color(0.8, 0.8, 0.8, 1)
+[node name="torch6" parent="top_right/torches_panel/torches" instance=ExtResource("12_8tqxu")]
 layout_mode = 2
-texture = ExtResource("9_1gj7e")
+id = 6
 
-[node name="torch5" type="TextureRect" parent="top_right/torches_panel/torches"]
-modulate = Color(0.8, 0.8, 0.8, 1)
+[node name="torch5" parent="top_right/torches_panel/torches" instance=ExtResource("12_8tqxu")]
 layout_mode = 2
-texture = ExtResource("9_1gj7e")
+id = 5
 
-[node name="torch4" type="TextureRect" parent="top_right/torches_panel/torches"]
-modulate = Color(0.8, 0.8, 0.8, 1)
+[node name="torch4" parent="top_right/torches_panel/torches" instance=ExtResource("12_8tqxu")]
 layout_mode = 2
-texture = ExtResource("9_1gj7e")
+id = 4
 
-[node name="torch3" type="TextureRect" parent="top_right/torches_panel/torches"]
-modulate = Color(0.8, 0.8, 0.8, 1)
+[node name="torch3" parent="top_right/torches_panel/torches" instance=ExtResource("12_8tqxu")]
 layout_mode = 2
-texture = ExtResource("9_1gj7e")
+id = 3
 
-[node name="torch2" type="TextureRect" parent="top_right/torches_panel/torches"]
-modulate = Color(0.8, 0.8, 0.8, 1)
+[node name="torch2" parent="top_right/torches_panel/torches" instance=ExtResource("12_8tqxu")]
 layout_mode = 2
-texture = ExtResource("9_1gj7e")
+id = 2
 
-[node name="torch1" type="TextureRect" parent="top_right/torches_panel/torches"]
-modulate = Color(0.796078, 0.796078, 0.796078, 1)
+[node name="torch1" parent="top_right/torches_panel/torches" instance=ExtResource("12_8tqxu")]
 layout_mode = 2
-texture = ExtResource("9_1gj7e")
+id = 1
 
 [node name="torch_icon" type="TextureRect" parent="top_right"]
 layout_mode = 2
@@ -228,3 +226,7 @@ script = ExtResource("10_kye1u")
 [connection signal="value_changed" from="bottom_left/hearts/heart3" to="bottom_left/hearts" method="_on_heart_3_value_changed"]
 [connection signal="value_changed" from="bottom_left/hearts/heart2" to="bottom_left/hearts" method="_on_heart_2_value_changed"]
 [connection signal="value_changed" from="bottom_left/hearts/heart1" to="bottom_left/hearts" method="_on_heart_1_value_changed"]
+[connection signal="mouse_entered" from="bottom_left/food" to="bottom_left/food" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="bottom_left/food" to="bottom_left/food" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="bottom_left/water" to="bottom_left/water" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="bottom_left/water" to="bottom_left/water" method="_on_mouse_exited"]
