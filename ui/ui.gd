@@ -11,12 +11,6 @@ signal mistake()
 
 @onready var tasks = $tasks
 
-func lose_life():
-	hearts.set_condition(-1)
-
-func gain_life():
-	hearts.set_condition(1)
-
 func change_food_value(value, id, timeout):
 	food_bar.set_condition(value, id)
 	tasks.add_new_task(id, "food", value, timeout)
@@ -70,7 +64,6 @@ func set_mistake_true(mistakes_made):
 		mistakes.set_mistake_true(mistakes_made)
 
 func reset():
-	#hearts.reset()
 	food_bar.reset()
 	water_bar.reset()
 	torches.reset()

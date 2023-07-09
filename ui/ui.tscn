@@ -1,11 +1,9 @@
-[gd_scene load_steps=20 format=3 uid="uid://df5xbd42n40dy"]
+[gd_scene load_steps=18 format=3 uid="uid://df5xbd42n40dy"]
 
 [ext_resource type="Script" path="res://ui/ui.gd" id="1_b3k1t"]
 [ext_resource type="Texture2D" uid="uid://2en4kmdthek3" path="res://art/ui/progress-bar-background.png" id="2_ahkln"]
-[ext_resource type="Script" path="res://ui/hearts.gd" id="2_dpohs"]
 [ext_resource type="Texture2D" uid="uid://eeh0pgo1scdl" path="res://art/ui/progress-bar-filll.png" id="2_fynqe"]
 [ext_resource type="Texture2D" uid="uid://dpb3wq7mb0r1a" path="res://art/ui/progress-bar-food-fill.png" id="3_brebb"]
-[ext_resource type="PackedScene" uid="uid://grcomksuxh0c" path="res://heart.tscn" id="3_t3h2c"]
 [ext_resource type="Texture2D" uid="uid://c2s48bufxnqi7" path="res://art/ui/progress-bar-water-fill.png" id="4_3r1em"]
 [ext_resource type="Script" path="res://ui/progress_bar.gd" id="7_264ll"]
 [ext_resource type="Texture2D" uid="uid://dax1mrhmtrdin" path="res://art/ui/panel-wide.png" id="8_xl4of"]
@@ -46,30 +44,6 @@ scale = Vector2(2.5, 2.5)
 pivot_offset = Vector2(-10, 10)
 theme_override_constants/separation = 0
 alignment = 2
-
-[node name="hearts" type="HBoxContainer" parent="bottom_left"]
-layout_mode = 2
-script = ExtResource("2_dpohs")
-
-[node name="heart1" parent="bottom_left/hearts" instance=ExtResource("3_t3h2c")]
-layout_mode = 2
-id = 1
-
-[node name="heart2" parent="bottom_left/hearts" instance=ExtResource("3_t3h2c")]
-layout_mode = 2
-id = 2
-
-[node name="heart3" parent="bottom_left/hearts" instance=ExtResource("3_t3h2c")]
-layout_mode = 2
-id = 3
-
-[node name="heart4" parent="bottom_left/hearts" instance=ExtResource("3_t3h2c")]
-layout_mode = 2
-id = 4
-
-[node name="heart5" parent="bottom_left/hearts" instance=ExtResource("3_t3h2c")]
-layout_mode = 2
-id = 5
 
 [node name="food" type="TextureProgressBar" parent="bottom_left"]
 layout_mode = 2
@@ -281,11 +255,6 @@ alignment = 2
 wait_time = 0.1
 one_shot = true
 
-[connection signal="value_changed" from="bottom_left/hearts/heart1" to="bottom_left/hearts" method="_on_heart_5_value_changed"]
-[connection signal="value_changed" from="bottom_left/hearts/heart2" to="bottom_left/hearts" method="_on_heart_4_value_changed"]
-[connection signal="value_changed" from="bottom_left/hearts/heart3" to="bottom_left/hearts" method="_on_heart_3_value_changed"]
-[connection signal="value_changed" from="bottom_left/hearts/heart4" to="bottom_left/hearts" method="_on_heart_2_value_changed"]
-[connection signal="value_changed" from="bottom_left/hearts/heart5" to="bottom_left/hearts" method="_on_heart_1_value_changed"]
 [connection signal="condition_fulfilled" from="bottom_left/food" to="." method="_on_food_condition_fulfilled"]
 [connection signal="mistake" from="bottom_left/food" to="." method="_on_food_mistake"]
 [connection signal="mouse_entered" from="bottom_left/food" to="bottom_left/food" method="_on_mouse_entered"]

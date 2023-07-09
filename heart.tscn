@@ -1,11 +1,46 @@
 [gd_scene load_steps=3 format=3 uid="uid://grcomksuxh0c"]
 
 [ext_resource type="Texture2D" uid="uid://bse5sfmwqjbt2" path="res://art/ui/heart.png" id="1_f17dh"]
-[ext_resource type="Script" path="res://ui/heart.gd" id="2_4jira"]
+
+[sub_resource type="GDScript" id="GDScript_huiv8"]
+script/source = "extends TextureRect
+
+signal value_changed(value)
+
+@export var id: int
+
+var value = 1;
+var can_be_clicked = false
+
+func _on_mouse_entered():
+	can_be_clicked = true
+	set_default_cursor_shape(CursorShape.CURSOR_POINTING_HAND)
+
+func _on_mouse_exited():
+	can_be_clicked = false
+
+func _input(event):
+	if event is InputEventMouseButton:
+		var mouse_event = event as InputEventMouseButton
+		if mouse_event.button_index == MOUSE_BUTTON_LEFT && mouse_event.pressed && can_be_clicked:
+			if value == 1:
+				value = 0
+				modulate = Color(0.7, 0.7, 0.7)
+			else:
+				value = 1
+				modulate = Color(1, 1, 1)
+			value_changed.emit(value)
+
+func set_value(value)
+	self.value = value
+	if value == 0:
+		modulate = Color(0.7, 0.7, 0.7)
+	else:
+		modulate = Color(1, 1, 1)"
 
 [node name="heart" type="TextureRect"]
 texture = ExtResource("1_f17dh")
-script = ExtResource("2_4jira")
+script = SubResource("GDScript_huiv8")
 id = null
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
