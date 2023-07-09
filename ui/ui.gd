@@ -3,7 +3,6 @@ extends Control
 signal condition_fulfilled(id)
 signal mistake()
 
-@onready var hearts = $bottom_left/hearts
 @onready var food_bar = $bottom_left/food
 @onready var water_bar = $bottom_left/water
 @onready var torches = $top_right/torches_panel/torches

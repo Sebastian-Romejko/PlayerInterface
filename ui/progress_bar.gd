@@ -9,6 +9,7 @@ signal mistake()
 var can_scroll = false
 var conditions = {}
 var conditions_values = {}
+var value_backup
 
 func _on_mouse_entered():
 	can_scroll = true
@@ -16,6 +17,9 @@ func _on_mouse_entered():
 
 func _on_mouse_exited():
 	can_scroll = false
+
+func _ready():
+	value_backup = value
 
 func _input(event):
 	if event is InputEventMouseButton:
@@ -46,6 +50,8 @@ func set_condition(value, id):
 
 func _on_timer_timeout():
 	if conditions.is_empty():
+		value = value_backup
+		label.text = str(value)
 		mistake.emit()
 		return
 
@@ -57,8 +63,11 @@ func _on_timer_timeout():
 			label.text = str(value)
 			condition_fulfilled.emit(condition_id)
 			condition_id_done = condition_id
+			value_backup = value
 			break
 		else:
+			value = value_backup
+			label.text = str(value)
 			mistake.emit()
 			break
 	if condition_id_done != null:
@@ -90,3 +99,4 @@ func reset():
 	conditions = {}
 	conditions_values = {}
 	can_scroll = false
+	value_backup = null

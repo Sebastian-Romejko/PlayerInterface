@@ -100,7 +100,6 @@ func _on_torch_6_value_changed(value):
 
 func _on_torch_7_value_changed(value):
 	torches[7] = value
-	print("SET VALUE FOR TORCH 7: %s" % value)
 	check_condition()
 	if mistake_made:
 		torches[7] = 1 if torches[7] == 0 else 0
@@ -113,12 +112,8 @@ func check_condition():
 		mistake_made = true
 		return
 
-	print("FIRST NEGATIVE: %s" % get_first_negative_torch())
-	print("order correct: %s" % is_order_correct())
 	var condition_id_done
 	for condition_id in conditions.keys():
-		print("CONDITION: %s" % conditions[condition_id])
-		print("CONDITION VALUE: %s" % conditions_values[condition_id])
 		if ((conditions_values[condition_id] == 0 \
 			&& get_first_negative_torch() == conditions[condition_id]) \
 			|| (conditions_values[condition_id] == 1 \
@@ -139,7 +134,6 @@ func recalculate_conditions():
 
 func get_first_negative_torch():
 	for i in range(1, torches.size() + 1,1):
-		print("torch %s: %s" % [i, torches[i]])
 		if torches[i] == 0:
 			return i
 	return 0

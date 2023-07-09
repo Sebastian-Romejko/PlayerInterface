@@ -23,8 +23,12 @@ func _process(delta):
 		active_conditions[id] -= delta
 		if active_conditions[id] <= 0:
 			active_conditions_id_to_remove = id
-			make_mistake()
-			break;
+			ui.set_mistake_true(mistakes_made)
+			mistakes_made += 1
+			if mistakes_made >= 3:
+				game_over_panel.visible = true
+				game_over_panel.set_time()
+			break
 
 	active_conditions.erase(active_conditions_id_to_remove)
 
@@ -53,25 +57,23 @@ func _on_collectibles_torch_gained():
 	ui.gain_torch(next_condition_id, seconds_for_task)
 
 func _on_ui_condition_fulfilled(id):
-	print("Condition fulfilled: " + str(id))
 	active_conditions.erase(id)
 
 func _on_ui_mistake():
-	make_mistake()
-
-func add_new_condition():
-	next_condition_id += 1
-	active_conditions[next_condition_id] = seconds_for_task
-
-func make_mistake():
 	mistakes_made += 1
-	ui.set_mistake_true(mistakes_made - 1)
 	if mistakes_made >= 3:
+		ui.set_mistake_true(1)
+		ui.set_mistake_true(2)
+		ui.set_mistake_true(3)
 		game_over_panel.visible = true
 		game_over_panel.set_time()
 	else:
 		add_new_condition()
 		ui.add_mistake(next_condition_id, seconds_for_task)
+
+func add_new_condition():
+	next_condition_id += 1
+	active_conditions[next_condition_id] = seconds_for_task
 
 func _on_game_over_panel_start_again():
 	mistakes_made = 0

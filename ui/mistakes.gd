@@ -71,7 +71,7 @@ func recalculate_conditions():
 		conditions[condition_id] = get_first_negative_mistake()
 
 func get_first_negative_mistake():
-	for i in range(1,mistakes.size(),1):
+	for i in range(1,mistakes.size() + 1,1):
 		if mistakes[i] == 0:
 			return i
 	return 0
