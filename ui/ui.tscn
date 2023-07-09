@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://df5xbd42n40dy"]
+[gd_scene load_steps=19 format=3 uid="uid://df5xbd42n40dy"]
 
 [ext_resource type="Script" path="res://ui/ui.gd" id="1_b3k1t"]
 [ext_resource type="Texture2D" uid="uid://2en4kmdthek3" path="res://art/ui/progress-bar-background.png" id="2_ahkln"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" path="res://ui/time.gd" id="10_kye1u"]
 [ext_resource type="Script" path="res://ui/torches.gd" id="12_4t6v7"]
 [ext_resource type="PackedScene" uid="uid://cegvcf8j2et2" path="res://ui/torch.tscn" id="12_8tqxu"]
+[ext_resource type="PackedScene" uid="uid://ck3af7cvqkhws" path="res://art/ui/torch.tscn" id="13_efnv2"]
 [ext_resource type="Texture2D" uid="uid://d1lh3llewstte" path="res://art/torch.png" id="14_hvcgr"]
 [ext_resource type="Script" path="res://ui/tasks.gd" id="17_hjw4c"]
 
@@ -191,6 +192,7 @@ layout_mode = 2
 id = 1
 
 [node name="torch_icon" type="TextureRect" parent="top_right"]
+visible = false
 layout_mode = 2
 offset_left = 405.333
 offset_top = -20.0
@@ -198,6 +200,11 @@ offset_right = 469.333
 offset_bottom = 44.0
 scale = Vector2(2, 2)
 texture = ExtResource("14_hvcgr")
+
+[node name="torch" parent="top_right" instance=ExtResource("13_efnv2")]
+position = Vector2(469.167, 44.1667)
+scale = Vector2(2, 2)
+frame = 2
 
 [node name="top_left" type="BoxContainer" parent="."]
 layout_mode = 1
@@ -259,6 +266,7 @@ one_shot = true
 [connection signal="mistake" from="bottom_left/food" to="." method="_on_food_mistake"]
 [connection signal="mouse_entered" from="bottom_left/food" to="bottom_left/food" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="bottom_left/food" to="bottom_left/food" method="_on_mouse_exited"]
+[connection signal="ready" from="bottom_left/food" to="bottom_left/food" method="_on_ready"]
 [connection signal="timeout" from="bottom_left/food/Timer" to="bottom_left/food" method="_on_timer_timeout"]
 [connection signal="condition_fulfilled" from="bottom_left/water" to="." method="_on_water_condition_fulfilled"]
 [connection signal="mistake" from="bottom_left/water" to="." method="_on_water_mistake"]

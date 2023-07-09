@@ -9,7 +9,7 @@ signal mistake()
 var can_scroll = false
 var conditions = {}
 var conditions_values = {}
-var value_backup
+var value_backup: int = 100
 
 func _on_mouse_entered():
 	can_scroll = true
@@ -18,7 +18,7 @@ func _on_mouse_entered():
 func _on_mouse_exited():
 	can_scroll = false
 
-func _ready():
+func _on_ready():
 	value_backup = value
 
 func _input(event):
@@ -100,4 +100,8 @@ func reset():
 	conditions = {}
 	conditions_values = {}
 	can_scroll = false
-	value_backup = null
+	value_backup = 100
+
+
+func _on_static_body_2d_input_event():
+	pass

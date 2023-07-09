@@ -1,0 +1,52 @@
+[gd_scene load_steps=7 format=3 uid="uid://ck3af7cvqkhws"]
+
+[ext_resource type="Texture2D" uid="uid://dejso4ajq7ltl" path="res://art/ui/torch_animated.png" id="1_vr8wx"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_r16cm"]
+animation = &"default"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_erwe0"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_v8rwx"]
+states/default/node = SubResource("AnimationNodeAnimation_r16cm")
+states/default/position = Vector2(357.333, 101.111)
+transitions = ["Start", "default", SubResource("AnimationNodeStateMachineTransition_erwe0")]
+
+[sub_resource type="Animation" id="Animation_4jrib"]
+resource_name = "default"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xv1v2"]
+_data = {
+"default": SubResource("Animation_4jrib")
+}
+
+[node name="torch" type="Sprite2D"]
+texture = ExtResource("1_vr8wx")
+hframes = 3
+vframes = 2
+frame = 2
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_v8rwx")
+anim_player = NodePath("../AnimationPlayer")
+active = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_xv1v2")
+}

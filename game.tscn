@@ -82,6 +82,7 @@ script = ExtResource("1_l0fib")
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("2_xvaf8")
 volume_db = 5.0
+autoplay = true
 
 [node name="timers" type="Node" parent="."]
 
@@ -104,7 +105,7 @@ autostart = true
 [node name="game_over_panel" parent="CanvasLayer" instance=ExtResource("4_0ky4q")]
 visible = false
 
-[node name="intruction_panel" parent="CanvasLayer" instance=ExtResource("5_hhjxv")]
+[node name="introduction_panel" parent="CanvasLayer" instance=ExtResource("5_hhjxv")]
 
 [node name="TileMap" type="TileMap" parent="."]
 scale = Vector2(1.2, 1.2)
@@ -149,9 +150,9 @@ min_x = -1152
 max_x = 1801
 min_y = -657
 max_y = 922
-food_count = 40
+food_count = 30
 water_count = 60
-torch_count = 40
+torch_count = 20
 character = NodePath("../character")
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -164,7 +165,7 @@ zoom = Vector2(2.5, 2.5)
 [connection signal="condition_fulfilled" from="CanvasLayer/ui" to="." method="_on_ui_condition_fulfilled"]
 [connection signal="mistake" from="CanvasLayer/ui" to="." method="_on_ui_mistake"]
 [connection signal="start_again" from="CanvasLayer/game_over_panel" to="." method="_on_game_over_panel_start_again"]
-[connection signal="start_game" from="CanvasLayer/intruction_panel" to="." method="_on_intruction_panel_start_game"]
+[connection signal="start_game" from="CanvasLayer/introduction_panel" to="." method="_on_intruction_panel_start_game"]
 [connection signal="food_change" from="collectibles" to="." method="_on_collectibles_food_change"]
 [connection signal="torch_gained" from="collectibles" to="." method="_on_collectibles_torch_gained"]
 [connection signal="water_change" from="collectibles" to="." method="_on_collectibles_water_change"]

@@ -19,6 +19,7 @@ var active_conditions = {}
 var mistakes_made = 0
 
 func _on_intruction_panel_start_game():
+	start_game()
 	introduction_panel.visible = false
 
 func _process(delta):
@@ -61,9 +62,7 @@ func _on_collectibles_torch_gained():
 	ui.gain_torch(next_condition_id, seconds_for_task)
 
 func _on_ui_condition_fulfilled(id):
-	print("COMPLETED: %s" % id)
 	active_conditions.erase(id)
-	print("ACTIVE CONDITIONS: %s" % active_conditions.size())
 
 func _on_ui_mistake():
 	mistakes_made += 1

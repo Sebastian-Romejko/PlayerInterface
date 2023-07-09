@@ -22,6 +22,10 @@ const TORCH_PATH = "res://collectibles/torch.tscn"
 func _ready():
 	spawn_collectibles()
 
+func _process(_delta):
+	if get_children().size() < 40:
+		spawn_collectibles()
+
 func spawn_collectibles():
 	for i in range(food_count):
 		var food_scene: PackedScene = load(FOOD_PATH)
