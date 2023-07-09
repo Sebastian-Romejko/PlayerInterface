@@ -26,3 +26,9 @@ func _input(event):
 				modulate = Color(1, 1, 1)
 			value_changed.emit(value)
 
+func set_value(value)
+	self.value = value
+	if value == 0:
+		modulate = Color(0.7, 0.7, 0.7)
+	else:
+		modulate = Color(1, 1, 1)

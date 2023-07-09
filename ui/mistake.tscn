@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://kmce0fgqgovn"]
+
+[ext_resource type="Texture2D" uid="uid://nu1s0kta6njc" path="res://art/ui/panel-small.png" id="1_5toye"]
+[ext_resource type="Script" path="res://ui/mistake.gd" id="2_6gn5w"]
+[ext_resource type="Texture2D" uid="uid://ft5i8lrnawgy" path="res://art/ui/panel-small_checked.png" id="3_6xifx"]
+
+[node name="mistake1" type="TextureRect"]
+texture = ExtResource("1_5toye")
+stretch_mode = 2
+script = ExtResource("2_6gn5w")
+unchecked = ExtResource("1_5toye")
+checked = ExtResource("3_6xifx")
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

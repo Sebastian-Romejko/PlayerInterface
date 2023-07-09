@@ -7,6 +7,9 @@ signal mistake()
 @onready var food_bar = $bottom_left/food
 @onready var water_bar = $bottom_left/water
 @onready var torches = $top_right/torches_panel/torches
+@onready var mistakes = $bottom_right/mistakes
+
+@onready var tasks = $tasks
 
 func lose_life():
 	hearts.set_condition(-1)
@@ -14,14 +17,43 @@ func lose_life():
 func gain_life():
 	hearts.set_condition(1)
 
-func change_food_value(value, id):
+func change_food_value(value, id, timeout):
 	food_bar.set_condition(value, id)
+	tasks.add_new_task(id, "food", value, timeout)
 
-func change_water_value(value, id):
+func change_water_value(value, id, timeout):
 	water_bar.set_condition(value, id)
+	tasks.add_new_task(id, "water", value, timeout)
+
+func add_mistake(id, timeout):
+	mistakes.set_condition(id)
+	tasks.add_new_task(id, "mistake", 1, timeout)
 
 func _on_food_condition_fulfilled(id):
 	condition_fulfilled.emit(id)
+	tasks.task_done(id)
+
+func _on_water_condition_fulfilled(id):
+	condition_fulfilled.emit(id)
+	tasks.task_done(id)
+
+func _on_mistakes_condition_fulfilled(id):
+	condition_fulfilled.emit(id)
+	tasks.task_done(id)
 
 func _on_food_mistake():
 	mistake.emit()
+
+func _on_water_mistake():
+	mistake.emit()
+
+func _on_mistakes_mistake():
+	mistake.emit()
+
+func reset():
+	#hearts.reset()
+	food_bar.reset()
+	water_bar.reset()
+	#torches.reset()
+	mistakes.reset()
+	tasks.reset()

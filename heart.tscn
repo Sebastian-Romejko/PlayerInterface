@@ -6,6 +6,7 @@
 [node name="heart" type="TextureRect"]
 texture = ExtResource("1_f17dh")
 script = ExtResource("2_4jira")
+id = null
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

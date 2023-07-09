@@ -11,14 +11,16 @@ signal condition_fulfilled()
 var condition_heart_id
 var condition_value
 var hearts = {}
+var conditions = {}
+var mistake_made = false
 
 func _ready():
 	hearts = {
-		1: heart1.value,
-		2: heart2.value,
-		3: heart3.value,
-		4: heart4.value,
-		5: heart5.value,
+		1: 1,
+		2: 1,
+		3: 1,
+		4: 1,
+		5: 1,
 	}
 
 func set_condition(value):
@@ -36,7 +38,7 @@ func get_last_positive_heart():
 	return 0
 
 func get_first_negative_heart():
-	for i in range(0,hearts.size(),-1):
+	for i in range(0,hearts.size(),1):
 		if hearts[i] == 0:
 			return i
 	return 0
@@ -64,13 +66,29 @@ func _on_heart_5_value_changed(value):
 func check_condition():
 	if condition_heart_id != 0 \
 		&& hearts[condition_heart_id] == condition_value \
-		&& is_order_currect():
+		&& is_order_correct():
 		condition_heart_id = 0
 		condition_value = null
 		condition_fulfilled.emit()
 
-func is_order_currect():
+func is_order_correct():
 	for heart in hearts:
 		if heart.key > condition_heart_id && heart.value == 1:
 			return false
 	return true
+
+func reset():
+	heart1.set_value(1)
+	heart2.set_value(1)
+	heart3.set_value(1)
+	heart4.set_value(1)
+	heart5.set_value(1)
+	hearts = {
+		1: 1,
+		2: 1,
+		3: 1,
+		4: 1,
+		5: 1,
+	}
+	conditions = {}
+	mistake_made = false

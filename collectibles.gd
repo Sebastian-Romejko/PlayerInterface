@@ -54,12 +54,17 @@ func spawn_collectibles():
 		add_child(torch)
 
 func _on_food_gain(value):
-	print("FOOD TAKEN FOR: " + str(value))
+	#print("FOOD TAKEN FOR: " + str(value))
 	food_change.emit(value)
 
 func _on_water_gain(value):
-	print("WATER TAKEN FOR: " + str(value))
+	#print("WATER TAKEN FOR: " + str(value))
 	water_change.emit(value)
 
 func _on_torch_gain():
-	print("TORCH TAKEN")
+	#print("TORCH TAKEN")
+	torch_gained.emit()
+
+func clear():
+	for child in get_children():
+		child.queue_free()

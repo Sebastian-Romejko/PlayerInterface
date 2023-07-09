@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+@export var starting_position: Vector2
+
 @export var move_speed : float = 2000
 @export var idle_time_from : float = 1
 @export var idle_time_to : float = 2
@@ -20,6 +22,7 @@ var move_direction : Vector2 = Vector2.ZERO
 var nearest_collectible
 
 func _init():
+	position = starting_position
 	last_changed_position = position
 	last_changed_position_timestamp = Time.get_ticks_msec()
 

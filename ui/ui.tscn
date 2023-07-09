@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://df5xbd42n40dy"]
+[gd_scene load_steps=20 format=3 uid="uid://df5xbd42n40dy"]
 
 [ext_resource type="Script" path="res://ui/ui.gd" id="1_b3k1t"]
 [ext_resource type="Texture2D" uid="uid://2en4kmdthek3" path="res://art/ui/progress-bar-background.png" id="2_ahkln"]
@@ -7,15 +7,19 @@
 [ext_resource type="Texture2D" uid="uid://dpb3wq7mb0r1a" path="res://art/ui/progress-bar-food-fill.png" id="3_brebb"]
 [ext_resource type="PackedScene" uid="uid://grcomksuxh0c" path="res://heart.tscn" id="3_t3h2c"]
 [ext_resource type="Texture2D" uid="uid://c2s48bufxnqi7" path="res://art/ui/progress-bar-water-fill.png" id="4_3r1em"]
-[ext_resource type="Texture2D" uid="uid://d2l78k1htdyn2" path="res://art/ui/panel.png" id="5_1j6du"]
-[ext_resource type="Texture2D" uid="uid://nu1s0kta6njc" path="res://art/ui/panel-small.png" id="6_b2hjw"]
 [ext_resource type="Script" path="res://ui/progress_bar.gd" id="7_264ll"]
 [ext_resource type="Texture2D" uid="uid://dax1mrhmtrdin" path="res://art/ui/panel-wide.png" id="8_xl4of"]
 [ext_resource type="Texture2D" uid="uid://d11kh75kfw4kf" path="res://art/ui/panel-time.png" id="9_7g2p4"]
+[ext_resource type="Script" path="res://ui/mistakes.gd" id="9_487r8"]
+[ext_resource type="PackedScene" uid="uid://kmce0fgqgovn" path="res://ui/mistake.tscn" id="9_tumi7"]
 [ext_resource type="Script" path="res://ui/time.gd" id="10_kye1u"]
 [ext_resource type="Script" path="res://ui/torches.gd" id="12_4t6v7"]
 [ext_resource type="PackedScene" uid="uid://cegvcf8j2et2" path="res://ui/torch.tscn" id="12_8tqxu"]
 [ext_resource type="Texture2D" uid="uid://d1lh3llewstte" path="res://art/torch.png" id="14_hvcgr"]
+[ext_resource type="Script" path="res://ui/tasks.gd" id="17_hjw4c"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_vyn8t"]
+font_size = 70
 
 [sub_resource type="LabelSettings" id="LabelSettings_igttu"]
 font_size = 190
@@ -34,12 +38,11 @@ layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = -10.0
-offset_top = -192.0
-offset_right = 150.0
-offset_bottom = -126.0
+offset_top = -165.0
+offset_right = 160.0
+offset_bottom = -98.9999
 grow_vertical = 0
-scale = Vector2(3, 3)
+scale = Vector2(2.5, 2.5)
 pivot_offset = Vector2(-10, 10)
 theme_override_constants/separation = 0
 alignment = 2
@@ -70,7 +73,7 @@ id = 5
 
 [node name="food" type="TextureProgressBar" parent="bottom_left"]
 layout_mode = 2
-value = 50.0
+value = 100.0
 texture_under = ExtResource("2_fynqe")
 texture_over = ExtResource("2_ahkln")
 texture_progress = ExtResource("3_brebb")
@@ -78,6 +81,22 @@ script = ExtResource("7_264ll")
 
 [node name="Timer" type="Timer" parent="bottom_left/food"]
 one_shot = true
+
+[node name="Label" type="Label" parent="bottom_left/food"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 62.0
+offset_right = 62.0
+offset_bottom = 102.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.2, 0.2)
+text = "100"
+label_settings = SubResource("LabelSettings_vyn8t")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="water" type="TextureProgressBar" parent="bottom_left"]
 layout_mode = 2
@@ -90,6 +109,23 @@ script = ExtResource("7_264ll")
 [node name="Timer" type="Timer" parent="bottom_left/water"]
 one_shot = true
 
+[node name="Label" type="Label" parent="bottom_left/water"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 62.8
+offset_top = -0.200012
+offset_right = 62.8
+offset_bottom = 101.8
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.2, 0.2)
+text = "100"
+label_settings = SubResource("LabelSettings_vyn8t")
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="bottom_right" type="BoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 3
@@ -97,51 +133,42 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -440.0
-offset_top = -128.0
-offset_right = -220.0
-offset_bottom = -64.0
+offset_left = -305.0
+offset_top = -97.0
+offset_right = -153.0
+offset_bottom = -49.0
 grow_horizontal = 0
 grow_vertical = 0
 scale = Vector2(2, 2)
 pivot_offset = Vector2(10, 10)
 
-[node name="items" type="BoxContainer" parent="bottom_right"]
+[node name="mistakes" type="BoxContainer" parent="bottom_right"]
 layout_mode = 2
-size_flags_vertical = 8
+script = ExtResource("9_487r8")
 
-[node name="item3" type="TextureRect" parent="bottom_right/items"]
+[node name="mistake1" parent="bottom_right/mistakes" instance=ExtResource("9_tumi7")]
 layout_mode = 2
-texture = ExtResource("6_b2hjw")
-stretch_mode = 2
+id = 1
 
-[node name="item2" type="TextureRect" parent="bottom_right/items"]
+[node name="mistake2" parent="bottom_right/mistakes" instance=ExtResource("9_tumi7")]
 layout_mode = 2
-texture = ExtResource("6_b2hjw")
-stretch_mode = 2
+id = 2
 
-[node name="item1" type="TextureRect" parent="bottom_right/items"]
+[node name="mistake3" parent="bottom_right/mistakes" instance=ExtResource("9_tumi7")]
 layout_mode = 2
-texture = ExtResource("6_b2hjw")
-stretch_mode = 2
-
-[node name="weapon" type="TextureRect" parent="bottom_right"]
-layout_mode = 2
-size_flags_vertical = 8
-texture = ExtResource("5_1j6du")
-stretch_mode = 2
+id = 3
 
 [node name="top_right" type="Control" parent="."]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -749.0
-offset_right = -249.0
+offset_left = -599.0
+offset_right = -99.0
 offset_bottom = 64.0
 grow_horizontal = 0
-scale = Vector2(1.5, 1.5)
-pivot_offset = Vector2(20, -20)
+scale = Vector2(1.2, 1.2)
+pivot_offset = Vector2(50, -40)
 
 [node name="torches_panel" type="TextureRect" parent="top_right"]
 layout_mode = 2
@@ -227,6 +254,33 @@ horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("10_kye1u")
 
+[node name="tasks" type="ScrollContainer" parent="."]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -314.0
+offset_top = -210.0
+offset_right = -164.0
+offset_bottom = -1.0
+grow_horizontal = 0
+grow_vertical = 2
+scale = Vector2(2, 2)
+script = ExtResource("17_hjw4c")
+
+[node name="BoxContainer" type="VBoxContainer" parent="tasks"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 10
+theme_override_constants/separation = 5
+alignment = 2
+
+[node name="Timer" type="Timer" parent="tasks"]
+wait_time = 0.1
+one_shot = true
+
 [connection signal="value_changed" from="bottom_left/hearts/heart1" to="bottom_left/hearts" method="_on_heart_5_value_changed"]
 [connection signal="value_changed" from="bottom_left/hearts/heart2" to="bottom_left/hearts" method="_on_heart_4_value_changed"]
 [connection signal="value_changed" from="bottom_left/hearts/heart3" to="bottom_left/hearts" method="_on_heart_3_value_changed"]
@@ -237,5 +291,14 @@ script = ExtResource("10_kye1u")
 [connection signal="mouse_entered" from="bottom_left/food" to="bottom_left/food" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="bottom_left/food" to="bottom_left/food" method="_on_mouse_exited"]
 [connection signal="timeout" from="bottom_left/food/Timer" to="bottom_left/food" method="_on_timer_timeout"]
+[connection signal="condition_fulfilled" from="bottom_left/water" to="." method="_on_water_condition_fulfilled"]
+[connection signal="mistake" from="bottom_left/water" to="." method="_on_water_mistake"]
 [connection signal="mouse_entered" from="bottom_left/water" to="bottom_left/water" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="bottom_left/water" to="bottom_left/water" method="_on_mouse_exited"]
+[connection signal="timeout" from="bottom_left/water/Timer" to="bottom_left/water" method="_on_timer_timeout"]
+[connection signal="condition_fulfilled" from="bottom_right/mistakes" to="." method="_on_mistakes_condition_fulfilled"]
+[connection signal="mistake" from="bottom_right/mistakes" to="." method="_on_mistakes_mistake"]
+[connection signal="value_changed" from="bottom_right/mistakes/mistake1" to="bottom_right/mistakes" method="_on_mistake_1_value_changed"]
+[connection signal="value_changed" from="bottom_right/mistakes/mistake2" to="bottom_right/mistakes" method="_on_mistake_2_value_changed"]
+[connection signal="value_changed" from="bottom_right/mistakes/mistake3" to="bottom_right/mistakes" method="_on_mistake_3_value_changed"]
+[connection signal="timeout" from="tasks/Timer" to="tasks" method="_on_timer_timeout"]
