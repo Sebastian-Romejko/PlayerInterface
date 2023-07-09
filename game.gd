@@ -3,6 +3,7 @@ extends Node2D
 @onready var collectibles = $collectibles
 @onready var character = $character
 @onready var ui = $CanvasLayer/ui
+@onready var introduction_panel = $CanvasLayer/introduction_panel
 @onready var game_over_panel = $CanvasLayer/game_over_panel
 @onready var food_timer = $timers/food_timer
 @onready var water_timer = $timers/water_timer
@@ -16,6 +17,9 @@ extends Node2D
 var next_condition_id = 0
 var active_conditions = {}
 var mistakes_made = 0
+
+func _on_intruction_panel_start_game():
+	introduction_panel.visible = false
 
 func _process(delta):
 	var active_conditions_id_to_remove
@@ -57,11 +61,13 @@ func _on_collectibles_torch_gained():
 	ui.gain_torch(next_condition_id, seconds_for_task)
 
 func _on_ui_condition_fulfilled(id):
+	print("COMPLETED: %s" % id)
 	active_conditions.erase(id)
+	print("ACTIVE CONDITIONS: %s" % active_conditions.size())
 
 func _on_ui_mistake():
 	mistakes_made += 1
-	if mistakes_made >= 3:
+	if mistakes_made == 3:
 		ui.set_mistake_true(1)
 		ui.set_mistake_true(2)
 		ui.set_mistake_true(3)
@@ -76,6 +82,10 @@ func add_new_condition():
 	active_conditions[next_condition_id] = seconds_for_task
 
 func _on_game_over_panel_start_again():
+	start_game()
+	game_over_panel.visible = false
+
+func start_game():
 	mistakes_made = 0
 	next_condition_id = 0
 	active_conditions = {}

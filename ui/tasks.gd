@@ -9,6 +9,7 @@ var tasks = {}
 var condition_id_to_remove
 
 func add_new_task(condition_id, type, value, time):
+	print("TASK: %s %s %s" % [condition_id, type, value])
 	var task_scene: PackedScene = load(TASK_PATH)
 	var task = task_scene.instantiate()
 	task.init(type, value, time)

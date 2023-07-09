@@ -63,7 +63,7 @@ func _on_timer_timeout():
 			label.text = str(value)
 			condition_fulfilled.emit(condition_id)
 			condition_id_done = condition_id
-			value_backup = value
+			value_backup = value 
 			break
 		else:
 			value = value_backup
@@ -80,7 +80,8 @@ func recalculate_conditions():
 	var conditions_ids_done = []
 	for condition_id in conditions_values.keys():
 		var requested_value = self.value + conditions_values[condition_id]
-		if self.value == 100 || self.value == 0:
+		if (self.value == 100 && value > 0) \
+			|| (self.value == 0 && value < 0):
 			condition_fulfilled.emit(condition_id)
 			conditions_ids_done.append(condition_id)
 		elif requested_value >= 100:
