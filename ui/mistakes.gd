@@ -19,7 +19,6 @@ func _ready():
 	}
 
 func set_condition(id):
-	print("NEW CONDITION: %s %s" % [id, get_first_negative_mistake()])
 	conditions[id] = get_first_negative_mistake()
 
 func _on_mistake_1_value_changed(value):
@@ -58,7 +57,6 @@ func check_condition():
 	for condition_id in conditions.keys():
 		if get_first_negative_mistake() - 1 == conditions[condition_id] \
 			&& is_order_correct():
-			print("GOOD")
 			condition_id_done = condition_id
 			condition_fulfilled.emit(condition_id)
 		else:
@@ -73,8 +71,7 @@ func recalculate_conditions():
 		conditions[condition_id] = get_first_negative_mistake()
 
 func get_first_negative_mistake():
-	for i in range(1,mistakes.size() + 1,1):
-		print("TEST: %s %s" % [i, mistakes[i]])
+	for i in range(1,mistakes.size(),1):
 		if mistakes[i] == 0:
 			return i
 	return 0
@@ -85,9 +82,14 @@ func is_order_correct():
 			return false
 	return true
 	
-func set_last_mistake_true():
-	mistake3.set_value(1)
-	mistakes[3] = 1
+func set_mistake_true(id):
+	if id == 1:
+		mistake1.set_value(1)
+	elif id == 2:
+		mistake2.set_value(1)
+	else:
+		mistake3.set_value(1)
+	mistakes[id] = 1
 
 func reset():
 	mistake1.set_value(0)

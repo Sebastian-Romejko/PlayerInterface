@@ -27,3 +27,10 @@ func _input(event):
 				value = 1
 				texture = checked
 			value_changed.emit(value)
+
+func set_value(value):
+	self.value = value
+	if value == 0:
+		texture = unchecked
+	else:
+		texture = checked

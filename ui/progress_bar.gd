@@ -54,6 +54,7 @@ func _on_timer_timeout():
 		if value - conditions[condition_id] < 5 \
 			&& value - conditions[condition_id] > -5:
 			value = conditions[condition_id]
+			label.text = str(value)
 			condition_fulfilled.emit(condition_id)
 			condition_id_done = condition_id
 			break
@@ -61,6 +62,7 @@ func _on_timer_timeout():
 			mistake.emit()
 			break
 	if condition_id_done != null:
+		value = conditions[condition_id_done]
 		conditions.erase(condition_id_done)
 		conditions_values.erase(condition_id_done)
 		recalculate_conditions()
@@ -84,6 +86,7 @@ func recalculate_conditions():
 
 func reset():
 	value = 100
+	label.text = str(value)
 	conditions = {}
 	conditions_values = {}
 	can_scroll = false

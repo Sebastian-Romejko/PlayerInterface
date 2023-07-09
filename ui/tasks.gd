@@ -14,15 +14,16 @@ func add_new_task(condition_id, type, value, time):
 	task.init(type, value, time)
 	box_container.add_child(task)
 	tasks[condition_id] = task
-	move_child(task, 0)
+	box_container.move_child(task, 0)
 
 func task_done(condition_id):
 	condition_id_to_remove = condition_id
 	timer.start()
 
 func _on_timer_timeout():
-	tasks[condition_id_to_remove].task_done()
-	tasks.erase(condition_id_to_remove)
+	if tasks.has(condition_id_to_remove) && tasks[condition_id_to_remove] != null:
+		tasks[condition_id_to_remove].task_done()
+		tasks.erase(condition_id_to_remove)
 
 func reset():
 	tasks = {}
